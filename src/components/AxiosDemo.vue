@@ -21,7 +21,7 @@ export default {
   methods: {
     async MakeRequest () {
       this.loading = true
-      const content = await axios.get('/de/a/5da03c56503ca200015df6cb/api/event')
+      const content = await axios.get('https://corsproxy.io/?https%3A%2F%2Fwww.eventim-light.com%2Fde%2Fa%2F5da03c56503ca200015df6cb%2Fapi%2Fevent')
       this.content = content.data
       this.loading = false
     }
