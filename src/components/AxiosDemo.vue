@@ -25,13 +25,15 @@ export default {
       this.content = content.data
       this.loading = false
     }
+  },
+  mounted () {
+    this.MakeRequest ()
   }
 }
 </script>
 <template>
   <div class="hello">
     <h1>Axios/Vuetify Demo</h1>
-    <button @click="MakeRequest">Make Reqest</button>
     <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
