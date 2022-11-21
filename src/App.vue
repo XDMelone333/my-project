@@ -29,42 +29,47 @@ export default {
 <template>
   <div>
     <v-app id="inspire">
-      <v-layout row wrap>
-        <v-flex xs12 sm6 md4 lg3 v-for="event in content" :key="event.id">
-          <v-card
-            :loading="loading"
-            class="mx-auto my-12"
-            max-width="374"
-          >
-            <template slot="progress">
-              <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-              >
-              </v-progress-linear>
-            </template>
-            <v-img height="250" src="https://www.eventim-light.com/de/api/image/5fb790f208559a0a31c427bb/shop_preview/webp"></v-img>
-            <figcaption class="mx-3 mt-1 text-end grey--text" :style="{'font-size': '12px'}">Image: Christof Leim</figcaption>
-            <div class="white--text">
-              <h3 class="mx-4">Wohl bekloppt geworden</h3>
-              <v-card-subtitle class="mt-0">Die Comedy Mix Show im Atelier Theater</v-card-subtitle>
-              <v-divider class="mx-4"></v-divider>
-              <v-card-text>
-                <font-awesome-icon icon="fa-solid fa-calendar" class="me-1"/>19.11.2022 <font-awesome-icon icon="fa-solid fa-clock" class="ms-2" /> 19:30
-                <div class="my-2">
-                  <font-awesome-icon icon="fa-solid fa-location-dot" class="me-1"/> Atelier Theater, Köln
-                </div>
-              </v-card-text>
-            </div>
-            <v-card-actions>
-              <v-btn color="green" @click="reserve">
-                From 17.55€
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
+      <container>
+        <v-row no-gutters>
+          <v-col v-for="event in content" :key="event.id">
+            <v-card
+              :loading="loading"
+              class="mx-auto my-5"
+              max-width="374"
+              min-width="374"
+              outlined
+            >
+              <template slot="progress">
+                <v-progress-linear
+                  color="deep-purple"
+                  height="10"
+                  indeterminate
+                >
+                </v-progress-linear>
+              </template>
+              <v-img height="250" src="https://www.eventim-light.com/de/api/image/5fb790f208559a0a31c427bb/shop_preview/webp"></v-img>
+              <figcaption class="mx-3 mt-1 text-end grey--text" :style="{'font-size': '12px'}">Image: Christof Leim</figcaption>
+              <div class="white--text">
+                <h3 class="mx-4">Wohl bekloppt geworden</h3>
+                <v-card-subtitle class="mt-0">Die Comedy Mix Show im Atelier Theater</v-card-subtitle>
+                <v-divider class="mx-4"></v-divider>
+                <v-card-text>
+                  <font-awesome-icon icon="fa-solid fa-calendar" class="me-1"/> 19.11.2022
+                  <font-awesome-icon icon="fa-solid fa-clock" class="ms-2" /> 19:30
+                  <div class="my-2">
+                    <font-awesome-icon icon="fa-solid fa-location-dot" class="me-1"/> Atelier Theater, Köln
+                  </div>
+                </v-card-text>
+              </div>
+              <v-card-actions>
+                <v-btn color="green" @click="reserve">
+                  From 17.55€
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </container>
     </v-app>
   </div>
 </template>
