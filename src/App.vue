@@ -50,7 +50,7 @@ export default {
         <v-card-subtitle>Die Comedy Mix Show im Atelier Theater</v-card-subtitle>
         <v-divider class="mx-4"></v-divider>
         <v-card-text>
-          <v-icon small>date</v-icon> 19.11.2022 <font-awesome-icon icon="fa-solid fa-calendar" class="me-2" /> 19:30
+          <font-awesome-icon>email</font-awesome-icon> 19.11.2022 <font-awesome-icon icon="fa-solid fa-calendar" class="me-2" /> 19:30
         </v-card-text>
         <v-card-actions>
           <v-btn color="green" @click="reserve">
