@@ -1,25 +1,27 @@
 <script>
   import axios from 'axios'
-  let urlParams = new URLSearchParams(window.location.search);
-  let myParam = urlParams.get('api');
-
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get('api');
+  
   export var apiUrl = `https://corsproxy.io/?https%3A%2F%2Fwww.eventim-light.com%2Fde%2Fa%2F${myParam}%2Fapi%2Fevent`;
   export default {
-      data () {
+    data () {
       return {
-          content: [],
-          loading: false,
-          selection: 1,
+        content: [],
+        selection: 1,
+        loadEvents: false
       }
     },
     methods: {
       async MakeRequest () {
+        if (myParam) { 
           const content = await axios.get(apiUrl)
           this.content = content.data
+        }
       },
       reserve () {
         this.loading = true
-
         setTimeout(() => (this.loading = false), 2000)
       },
       getImageUrl (id) {
@@ -28,22 +30,26 @@
       formatPrice (price) {
         if (price.currency === "EUR") return `${price.value} €`
         else return `${price.value} ${price.currency}`
+      },
+      shouldload () {
+        if (myParam) {
+          this.loadEvents = true
+        }
       }
     },
     mounted () {
       this.MakeRequest ()
+      this.shouldload ()
     }
-
-}
-
+  }
 </script>
+
 <template>
   <div>
     <v-app id="inspire">
-      <v-row no-gutters>
+      <v-row no-gutters v-if="loadEvents">
         <v-col v-for="event in content" :key="event.id">
           <v-card
-            :loading="loading"
             class="mx-auto my-5"
             max-width="374"
             min-width="374"
@@ -85,6 +91,11 @@
           </v-card>
         </v-col>
       </v-row>
+      <div v-else>
+        <p>You have not specified the api Parameter. Please specify it.</p>
+        <br/>
+        <p>Examples: 5da03c56503ca200015df6cb or 5dbf6b3029170500015b181b</p>
+      </div>
     </v-app>
   </div>
 </template>
