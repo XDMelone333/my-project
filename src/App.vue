@@ -13,16 +13,14 @@
         loadEvents: false
       }
     },
+
     methods: {
+
       async MakeRequest () {
         if (myParam) { 
           const content = await axios.get(apiUrl)
           this.content = content.data
         }
-      },
-      reserve () {
-        this.loading = true
-        setTimeout(() => (this.loading = false), 2000)
       },
       getImageUrl (id) {
         return `https://www.eventim-light.com/de/api/image/${id}/shop_preview/webp`
@@ -35,8 +33,17 @@
         if (myParam) {
           this.loadEvents = true
         }
+      },
+      onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.fab = top > 20
+      },
+      toTop () {
+        this.$vuetify.goTo(0)
       }
     },
+
     mounted () {
       this.MakeRequest ()
       this.shouldload ()
@@ -47,7 +54,8 @@
 <template>
   <div>
     <v-app id="inspire">
-      <v-row no-gutters v-if="loadEvents">
+      <template v-if="loadEvents">
+      <v-row>
         <v-col v-for="event in content" :key="event.id">
           <v-card
             class="mx-auto my-5"
@@ -55,14 +63,6 @@
             min-width="374"
             outlined
           >
-            <template slot="progress">
-              <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-              >
-              </v-progress-linear>
-            </template>
             <v-img height="250" :src="getImageUrl(event.image.id)"></v-img>
             <figcaption class="mx-3 mt-1 text-end grey--text" :style="{'font-size': '12px'}">Image: {{ event.image.copyright }}</figcaption>
             <div class="white--text">
@@ -82,7 +82,13 @@
                 <v-btn depressed color="green--text">Sold out</v-btn>
               </template>
               <template v-else-if="!event.salesStart || event.salesStart < new Date().toISOString()">
-                <v-btn color="green" @click="reserve"> From {{ formatPrice(event.minPrice) }} </v-btn>
+                <v-btn
+                  v-scroll="onScroll"
+                  color="green"
+                  @click="toTop"
+                >
+                  From {{ formatPrice(event.minPrice) }}
+                </v-btn>
               </template>
               <template v-else>
                 <v-btn color="green darken-4 grey--text">Coming soon...</v-btn>
@@ -91,6 +97,7 @@
           </v-card>
         </v-col>
       </v-row>
+    </template>
       <div v-else>
         <p>You have not specified the api Parameter. Please specify it.</p>
         <br/>
