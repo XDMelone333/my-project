@@ -47,16 +47,22 @@
     mounted () {
       this.MakeRequest ()
       this.shouldload ()
-    }
+    },
+    computed: {
+      cols () {
+        const { lg, sm } = this.$vuetify.breakpoint
+        return lg ? [3, 9] : sm ? [9, 3] : [6, 6]
+      },
+    },
   }
 </script>
 
 <template>
   <div>
     <v-app id="inspire">
-      <template v-if="loadEvents">
-      <v-row>
-        <v-col v-for="event in content" :key="event.id">
+      <div v-if="loadEvents">
+      <v-layout row wrap justify-space-arround>
+        <v-flex v-for="event in content" :key="event.id">
           <v-card
             class="mx-auto my-5"
             max-width="374"
@@ -78,6 +84,7 @@
               </v-card-text>
             </div>
             <v-card-actions>
+              <div style="text-align: right">
               <template v-if="event.soldout">
                 <v-btn depressed color="green--text">Sold out</v-btn>
               </template>
@@ -93,12 +100,14 @@
               <template v-else>
                 <v-btn color="green darken-4 grey--text">Coming soon...</v-btn>
               </template>
+            </div>
             </v-card-actions>
           </v-card>
-        </v-col>
-      </v-row>
-    </template>
-      <div v-else>
+        </v-flex>
+      </v-layout>
+      
+    </div>
+      <div v-else style="text-align: center">
         <p>You have not specified the api Parameter. Please specify it.</p>
         <br/>
         <p>Examples: 5da03c56503ca200015df6cb or 5dbf6b3029170500015b181b</p>
