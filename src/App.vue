@@ -105,7 +105,6 @@
           </v-card>
         </v-flex>
       </v-layout>
-      
     </div>
       <div v-else style="text-align: center">
         <p>You have not specified the api Parameter. Please specify it.</p>
