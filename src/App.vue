@@ -1,6 +1,6 @@
 <script>
 
-import EventCard from './components/EventCard.vue'
+import EventList from './components/EventList.vue'
   
   const urlParams = new URLSearchParams(window.location.search);
   const myParam = urlParams.get('api');
@@ -13,19 +13,19 @@ import EventCard from './components/EventCard.vue'
     },
 
     methods: {
-      shouldload () {
-        if (myParam) {
+      shouldload (value) {
+        if (value) {
           this.loadEvents = true
         }
       },
     },
 
     mounted () {
-      this.shouldload ()
+      this.shouldload (myParam)
     },
 
     components: {
-      EventCard
+      EventList
     }
 
   }
@@ -35,7 +35,7 @@ import EventCard from './components/EventCard.vue'
   <div>
     <v-app id="inspire">
       <div v-if="loadEvents">
-        <EventCard/>
+        <EventList/>
       </div>
       <div v-else style="text-align: center">
         <p>You have not specified the api Parameter. Please specify it.</p>

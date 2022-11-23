@@ -70,24 +70,22 @@
             </div>
           </v-card-text>
         </div>
-        <v-card-actions>
-          <div style="text-align: right">
-            <template v-if="event.soldout">
-              <v-btn depressed color="green--text">Sold out</v-btn>
-            </template>
-            <template v-else-if="!event.salesStart || event.salesStart < new Date().toISOString()">
-              <v-btn
-                v-scroll="onScroll"
-                color="green"
-                @click="toTop"
-              >
-                From {{ formatPrice(event.minPrice) }}
-              </v-btn>
-            </template>
-            <template v-else>
-              <v-btn color="green darken-4 grey--text">Coming soon...</v-btn>
-            </template>
-          </div>
+        <v-card-actions class="justify-end">
+          <template v-if="event.soldout">
+            <v-btn depressed color="green--text">Sold out</v-btn>
+          </template>
+          <template v-else-if="!event.salesStart || event.salesStart < new Date().toISOString()">
+            <v-btn
+              v-scroll="onScroll"
+              color="green"
+              @click="toTop"
+            >
+              From {{ formatPrice(event.minPrice) }}
+            </v-btn>
+          </template>
+          <template v-else>
+            <v-btn color="green darken-4 grey--text">Coming soon...</v-btn>
+          </template>
         </v-card-actions>
       </v-card>
     </v-flex>
