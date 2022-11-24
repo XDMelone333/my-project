@@ -11,6 +11,7 @@ import axios from 'axios'
     data () {
       return {
         content: [],
+        search: ''
       }
     },
 
@@ -36,14 +37,19 @@ import axios from 'axios'
       },
       toTop () {
         this.$vuetify.goTo(0)
-      },
-      filterContent () {
-        return this.content.filter(events => events.id)
-    }
+      }
     },
 
     mounted () {
       this.MakeRequest ()
+    },
+
+    computed: {
+      filteredContent: function () {
+        return this.content.filter((event) => {
+          return event.title.match(this.search)
+        })
+      }
     }
   }
 
@@ -53,8 +59,11 @@ import axios from 'axios'
 <template>
 
   <div>
+    <v-container>
+      <v-text-field v-model="search" label="Search" placeholder="Title" filled rounded dense></v-text-field>
+    </v-container>
     <v-layout row wrap justify-space-arround>
-      <v-flex v-for="event in filterContent()" :key="event.id">
+      <v-flex v-for="event in filteredContent" :key="event.id">
         <v-card
           class="mx-auto my-5"
           max-width="374"
