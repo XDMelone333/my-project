@@ -62,6 +62,7 @@ import axios from 'axios'
     <v-container>
       <v-text-field v-model="search" label="Search" placeholder="Title" filled rounded dense></v-text-field>
     </v-container>
+    <v-container>
     <v-layout row wrap justify-space-arround>
       <v-flex v-for="event in filteredContent" :key="event.id">
         <v-card
@@ -104,6 +105,7 @@ import axios from 'axios'
         </v-card>
       </v-flex>
     </v-layout>
+  </v-container>
   </div>
 
 </template>
