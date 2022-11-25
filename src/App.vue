@@ -40,7 +40,7 @@ import EventList from './components/EventList.vue'
       <div v-else style="text-align: center">
         <p>You have not specified the api Parameter. Please specify it.</p>
         <br/>
-        <p>Examples: 5da03c56503ca200015df6cb or 5dbf6b3029170500015b181b</p>
+        <p>Examples: </p><a href="./?api=5da03c56503ca200015df6cb">5da03c56503ca200015df6cb</a> <p> or </p> <a href="./?api=5dbf6b3029170500015b181b">5dbf6b3029170500015b181b</a>
       </div>
     </v-app>
   </div>
