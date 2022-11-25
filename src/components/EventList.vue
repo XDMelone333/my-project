@@ -47,7 +47,7 @@ import axios from 'axios'
     computed: {
       filteredContent: function () {
         return this.content.filter((event) => {
-          return event.title.match(this.search)
+          return event.title.toLowerCase().match(this.search.toLowerCase())
         })
       }
     }
